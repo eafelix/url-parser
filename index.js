@@ -4,19 +4,20 @@ var argv = require("minimist")(process.argv.slice(2)),
     parserFormatUrl = [],
     resObj = {};
 
-var onError = function(msg) {
+function onError(msg) {
     console.log("ERROR: " + msg);
     process.exit(1);
-};
-var onInfo = function(msg) {
+}
+
+function onInfo(msg) {
     console.log("INFO: " + msg);
-};
+}
 
-var cleanUrl = function(url) {
+function cleanUrl(url) {
     return url.replace(/.*?:\/\//g, "");
-};
+}
 
-var parseQueryString = function(obj, queryString) {
+function parseQueryString(obj, queryString) {
     var keyValPairs = [];
 
     if (queryString.length) {
@@ -32,9 +33,9 @@ var parseQueryString = function(obj, queryString) {
             obj[keyVal[0]].push(keyVal[1]);
         }
     }
-};
+}
 
-var castArrayToNum = function(array) {
+function castArrayToNum(array) {
     var temp = array.map(function (value) {
         if (!isNaN(value)) {
             return +value;
@@ -48,27 +49,21 @@ var castArrayToNum = function(array) {
     }
 
     return temp;
-};
+}
 
-//check params
 if (argv.length < 2) {
     onError("the url doesn't match with the format provided" );
 }
 
-//parse elements of format url
 parserFormatUrl = cleanUrl(argv._[0]).split('/');
 
-//parse elements of url
 parsedUrl = cleanUrl(argv._[1]).split('/');
 
-//check parseable path number of levels
 if (parserFormatUrl.length !== parsedUrl.length) {
     onError("url dont match with the format url provided");
 }
 
-//build object
 parserFormatUrl.forEach(function(value, index, array) {
-    //check if the param is a query string
     var extract = parsedUrl[index].split("?");
 
     if (array.length - 1 === index) {
@@ -81,10 +76,8 @@ parserFormatUrl.forEach(function(value, index, array) {
         var key = value.substring(1, value.length);
         resObj[key] = extract[0];
     }
-
 });
 
-//check and convert string numbers to numbers
 for (var key in resObj) {
     switch (Object.prototype.toString.call(resObj[key])) {
         case "[object Array]":
