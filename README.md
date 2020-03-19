@@ -19,10 +19,11 @@ node index.js "profile/:user/info/:section" "profile/felix/info/history?from=199
 ## Result:
 
 ```bash
-{ user: 'felix',
+{ 
+  user: 'felix',
   from: 1990,
   till: 2015,
   params: [ 1, 2, 3 ],
-  section: 'history' }
-
+  section: 'history' 
+}
 ```
