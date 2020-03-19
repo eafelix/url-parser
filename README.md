@@ -1,26 +1,24 @@
-#Little URL Parser
+# Little URL Parser
 
 You can transform a dynamic URL to JSON object. This supports the transformation numbers, query strings and arrays.
 
 Enjoy!!!
 
-####Install
+## Install
 
-```
+```bash
 npm install
 ```
 
+### Usage
 
-####Usage
-
-```
+```bash
 node index.js "profile/:user/info/:section" "profile/felix/info/history?from=1990&till=2015&param=1&&param=2&param=3"
 ```
 
+## Result:
 
-####Result:
-
-```
+```bash
 { user: 'felix',
   from: 1990,
   till: 2015,
